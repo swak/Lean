@@ -229,6 +229,10 @@ namespace QuantConnect.Lean.Engine.Results
             //SampleEquity(job.periodStart, job.startingCapital);
             //SamplePerformance(job.periodStart, 0);
 
+            // Prime Message queue with one empty packet
+            // in order to show results faster
+            Messages.Enqueue(new BacktestResultPacket(_job, new BacktestResult()));
+
             try
             {
                 while (!(_exitTriggered && Messages.Count == 0))
