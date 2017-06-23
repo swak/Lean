@@ -212,6 +212,11 @@ namespace QuantConnect.Lean.Engine.Results
             _setupHandler = setupHandler;
             _job = (BacktestNodePacket)job;
             if (_job == null) throw new Exception("BacktestingResultHandler.Constructor(): Submitted Job type invalid.");
+            
+            // Set the correct date range from the Algorithm
+            _job.PeriodStart = Algorithm.StartDate;
+            _job.PeriodFinish = Algorithm.EndDate;
+
             _compileId = _job.CompileId;
             _backtestId = _job.BacktestId;
         }
